@@ -48,5 +48,10 @@ public class Task extends Model{
             options.put(c.id.toString(), c.name);
         }
         return options;
-    }    
+    }
+    /*
+    public static Page<Task> report_tasks(){
+    	return find.fetch("service").fetch("service.unit").orderby().findList();
+    }
+    */
 }
