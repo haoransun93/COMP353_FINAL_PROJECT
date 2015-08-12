@@ -81,9 +81,11 @@ public class AdminController extends Controller{
     
     public static Result report_unit_service() {
         return TODO;
+        //query the task table, and get a breakdown of the tasks by unit, service, and year
     }
     
     public static Result report_doctor_service() {
         return TODO;
+        //query the 
     }
 }
