@@ -41,10 +41,15 @@ GET     /admin/order/:id/delete       					controllers.AdminController.delete_or
 GET     /admin/order_content/:id/list					controllers.AdminController.order_content_index(id:Long)
 GET 	/admin/order_content/param_list					controllers.AdminController.display_order_content(id:Long, page:Int ?=0, s ?= "name", o ?= "asc", f ?= "")
 GET		/admin/order_content/:id/create					controllers.AdminController.add_order_content(id:Long)
-GET		/admin/order_content/:id/save					controllers.AdminController.save_order_content(id:Long)
+POST	/admin/order_content/:id/save					controllers.AdminController.save_order_content(id:Long)
 GET		/admin/order_content/param_list/edit			controllers.AdminController.edit_order_content(id:Long, page:Int ?=0, s ?= "name", o ?= "asc", f ?= "")
+<<<<<<< HEAD
 GET    	/admin/order_content/param_list/delete     		controllers.AdminController.delete_order_content(id:Long, orderID:Long)
 POST 	/admin/order_content/finish						controllers.AdminController.finish_edit()
+=======
+GET     /admin/order_content/:id/delete		     		controllers.AdminController.delete_order_content(id:Long)
+GET 	/admin/order_content/:id/finish					controllers.AdminController.finish_edit(id:Long)
+>>>>>>> 84c75f48749a30c9b80393378ea5eeff59dd238b
 
 ##### OPERATING ROOM #####
 GET		/admin/operating_room/index						controllers.AdminController.operating_room_index()

@@ -16,6 +16,7 @@ public class Orders extends Model{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long id;
 	
+	@Constraints.Required
 	public Date date;
 	
     public static Model.Finder<Long,Orders> find = new Model.Finder<Long,Orders>(Long.class, Orders.class);

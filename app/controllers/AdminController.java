@@ -131,40 +131,45 @@ public class AdminController extends Controller{
          return edit_order_content(orderForm.get().id, 0, "id", "asc", "");  
     }
     public static Result delete_order(long id){
-    	Orders.find.ref(id).delete();
+    	Orders.find.byId(id).delete();
     	flash("success","Computer has been deleted");
     	return order_index();
     }
     
     //////////SUPPLY ORDER CONTENTS////////////
-    public static Result order_content_index(Long id){	
-    	return display_order_content(id, 0, "id", "asc","");
+    public static Result order_content_index(Long orderID){	
+    	return display_order_content(orderID, 0, "id", "asc","");
     }
-    public static Result display_order_content(long id, int page, String sortBy, String orderBy, String filter){
+    public static Result display_order_content(long orderID, int page, String sortBy, String orderBy, String filter){
     	return ok(
-    			display_order_content.render(id,OrderContent.page(page, 10, sortBy, orderBy, filter),sortBy,orderBy,filter)
+    			display_order_content.render(orderID,OrderContent.page(page, 10, sortBy, orderBy, filter),sortBy,orderBy,filter)
     			);
     }
-    public static Result add_order_content(Long id) {
+    public static Result add_order_content(Long orderID) {
     	Form<OrderContent> contentForm = form(OrderContent.class);
     	return ok(
-    			add_order_content.render(id, contentForm)
+    			add_order_content.render(orderID, contentForm)
     			);
     }
-    public static Result edit_order_content(Long id, int page, String sortBy, String orderBy, String filter){
+    public static Result edit_order_content(Long orderID, int page, String sortBy, String orderBy, String filter){
     	return ok(
-    			edit_order_content.render(id,OrderContent.page(page, 10, sortBy, orderBy, filter),sortBy,orderBy,filter)
+    			edit_order_content.render(orderID,OrderContent.page(page, 10, sortBy, orderBy, filter),sortBy,orderBy,filter)
     			);
     }
-    public static Result save_order_content(Long id){	
+    public static Result save_order_content(Long orderID){	
     	Form<OrderContent> contentForm = form(OrderContent.class).bindFromRequest();
     	if(contentForm.hasErrors()) {
+<<<<<<< HEAD
     		return TODO;
             //return badRequest(add_order_content.render(id,contentForm));
+=======
+            return badRequest(add_order_content.render(orderID,contentForm));
+>>>>>>> 84c75f48749a30c9b80393378ea5eeff59dd238b
         }
         contentForm.get().save();
-        return edit_order_content(id, 0, "id", "asc", ""); 
+        return edit_order_content(orderID, 0, "id", "asc", ""); 
     }    
+<<<<<<< HEAD
     
     public static Result delete_order_content(Long id, Long orderID){
     	return TODO;
@@ -172,6 +177,15 @@ public class AdminController extends Controller{
     
     public static Result finish_edit(){
     	return TODO; 
+=======
+    public static Result delete_order_content(Long orderID){
+    	OrderContent.find.byId(orderID).delete();
+    	flash("success","Computer has been deleted");
+    	return delete_order(orderID);
+    }
+    public static Result finish_edit(Long orderID){
+    	return order_index();
+>>>>>>> 84c75f48749a30c9b80393378ea5eeff59dd238b
     }
     
     public static Result operating_room_index() {
