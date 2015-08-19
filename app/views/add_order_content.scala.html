@@ -1,4 +1,4 @@
-@(id: Long, contentForm: Form[OrderContent])
+@(orderID: Long, contentForm: Form[OrderContent])
 
 @import helper._
 
@@ -6,7 +6,7 @@
 @main("Welcome to Play") {
 <h1>Add supplies to order</h1>
     
-    @form(routes.AdminController.save_order_content(id)) {
+    @form(routes.AdminController.save_order_content(orderID)) {
         <fieldset>
         	@select(
                 contentForm("order.id"), 
@@ -18,9 +18,9 @@
      		@inputText(contentForm("Quantity"), '_label -> "Quantity")
      		
      		@select(
-                contentForm("supply_sub_type.id"), 
-                options(SupplySubType.options), 
-                '_label -> "Supply Sub Type",
+                contentForm("supply_specific_type.id"), 
+                options(SupplySpecificType.options), 
+                '_label -> "Supply Specific Type",
                 '_showConstraints -> false
             )
             
@@ -40,8 +40,8 @@
         </fieldset>
         
         <div class="actions">
-            <input type="submit" value="Add this item" class="btn"> 
-            <a href="@routes.AdminController.edit_order_content(id, 0, "id", "asc", "")" class="btn">Cancel</a> 
+            <input type="submit" value="Add this item" class="btn"> or
+            <a href="@routes.AdminController.edit_order_content(orderID, 0, "id", "asc", "")" class="btn">Cancel</a> 
         </div>       
     }    
 }
