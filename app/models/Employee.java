@@ -41,6 +41,18 @@ public class Employee extends Model{
                 .findPagingList(pageSize)
                 .getPage(page);
     }
+    
+    public static Page<Employee> payroll(String id, int page, int pageSize, String sortBy, String order, String filter) {
+        return 
+            find.fetch("role")
+            	.fetch("unit")
+            	.where()
+                .ilike("id", id)
+                .findPagingList(pageSize)
+                .getPage(page);
+    }
+    
+    
 	public static Map<String,String> options() {
         LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
         for(Employee c: Employee.find.findList()) {

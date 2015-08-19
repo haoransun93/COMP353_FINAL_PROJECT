@@ -1,0 +1,46 @@
+@(id: Long, scheduleForm: Form[OperatingRoomSchedule])
+
+@import helper._
+
+
+@main("Welcome to Play") {
+<h1>Add a service</h1>
+    
+    @form(routes.AdminController.save_schedule()) {
+        
+        <fieldset>
+        
+            @select(
+                scheduleForm("operating_room.id"), 
+                options(OperatingRooms.get_room(id)), 
+                '_label -> "OperatingRoom",
+                '_showConstraints -> false
+            )
+            
+            @select(
+                scheduleForm("task.id"), 
+                options(Task.options), 
+                '_label -> "Tasks",
+                '_showConstraints -> false
+            ) 
+            
+            @inputText(scheduleForm("start"), '_label -> "Start DateTime")
+			
+			@inputText(
+           		field = scheduleForm("start_hour"),
+           		args = '_label -> "Start Hour", 'placeholder -> 0
+      		)
+      		@inputText(
+           		field = scheduleForm("end_hour"),
+           		args = '_label -> "End Hour", 'placeholder -> 0
+      		)
+            
+
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Create this service" class="btn"> or 
+            <a href="@routes.AdminController.service_index()" class="btn">Cancel</a> 
+        </div>       
+    }    
+}

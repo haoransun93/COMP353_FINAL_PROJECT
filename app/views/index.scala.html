@@ -1,11 +1,10 @@
 @(message: String, employeeForm: Form[Login])
 @import helper._
 
-    <h1>LOGIN</h1>
 @main("Welcome to Play") {
 
 @form(routes.Application.return_index()) {
-        
+    	<h1>LOGIN</h1>
         <fieldset>        
 			@inputText(employeeForm("username"), '_label -> "USERNAME")
 			@inputPassword(employeeForm("password"), '_label -> "PASSWORD")

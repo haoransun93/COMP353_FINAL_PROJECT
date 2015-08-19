@@ -32,7 +32,7 @@ public class Task extends Model{
 	public Shift shift;
 	
 	@Constraints.Required
-	public DateTime date;
+	public Date date;
 	
 	@Constraints.Required
 	public boolean canceled;
@@ -65,6 +65,16 @@ public class Task extends Model{
                 .findPagingList(pageSize)
                 .getPage(page);
 		}
+	}
+    
+    public static Page<Task> payroll(String filter, String pay_date_past_2_weeks, String pay_date) {
+			return 
+            find.fetch("service")
+            	.where()
+                .ilike("employee.id", filter)
+                .findPagingList(100)
+                .getPage(0);
+
 	}
 
 }

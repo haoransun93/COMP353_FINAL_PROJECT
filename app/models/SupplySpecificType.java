@@ -39,7 +39,7 @@ public class SupplySpecificType extends Model{
     public static Page<SupplySpecificType> page(int page, int pageSize, String sortBy, String order, String filter) {
         return 
             find.where()
-                .orderBy(sortBy + " " + order)
+                .orderBy("supply_sub_type.supply_type.name ASC, supply_sub_type.name ASC")
                 .findPagingList(pageSize)
                 .getPage(page);
     }

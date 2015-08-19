@@ -1,0 +1,23 @@
+@(currentPage: com.avaje.ebean.Page[Shift])
+
+@main("Intern / Resident") { 
+		<table class="table">
+			<thead>
+                <tr>
+                    <th>Shift ID</th>
+					<th>Start date</th>
+					<th>End date</th>
+                </tr>
+            </thead>           
+            <tbody>
+                @for(shift <- currentPage.getList) {
+                    <tr>
+					    
+						<td>@shift.id</td>
+						<td>@shift.start_date</td>
+						<td>@shift.end_date</td>						
+                    </tr>
+                }
+            </tbody>  
+		</table>
+}

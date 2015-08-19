@@ -10,11 +10,11 @@
         
         <fieldset>
         
-            @inputText(supplyForm("name"), '_label -> "supply name")
+            @inputText(supplyForm("name"), '_label -> "Supply Name")
 			
-			@inputText(supplyForm("cost"), '_label -> "supply cost")
+			@inputText(supplyForm("cost"), '_label -> "Supply Cost")
 			
-			@checkbox(field = supplyForm("is_immediate_shipping"))
+			@checkbox(field = supplyForm("is_immediate_shipping"), '_label -> "Fast Shipping")
 			
             @select(
                 supplyForm("supply_sub_type.id"), 

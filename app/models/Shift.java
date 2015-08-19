@@ -28,5 +28,12 @@ public class Shift extends Model{
 	
     public static Model.Finder<Long,Shift> find = new Model.Finder<Long,Shift>(Long.class, Shift.class);
 
-
+    public static Page<Shift> page(int page, int pageSize, String sortBy, String order, long filter) {
+        return 
+            find.where()
+                .ilike("employee_id", "%" + filter + "%")
+                .orderBy(sortBy + " " + order)
+                .findPagingList(pageSize)
+                .getPage(page);
+    }
 }

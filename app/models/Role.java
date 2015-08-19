@@ -34,4 +34,13 @@ public class Role extends Model{
                 .findPagingList(pageSize)
                 .getPage(page);
     }
+    
+    public static Page<Role> payroll(String user_role, int page, int pageSize, String sortBy, String order, String filter) {
+        return 
+            find.fetch("pay")
+            	.where()
+                .ilike("id", user_role)
+                .findPagingList(pageSize)
+                .getPage(page);
+    }
 }

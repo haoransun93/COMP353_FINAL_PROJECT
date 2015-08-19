@@ -1,4 +1,4 @@
-@(currentPage: com.avaje.ebean.Page[SupplySpecificType], currentSortBy: String, currentOrder: String, currentFilter: String) 
+@(currentPage: com.avaje.ebean.Page[OperatingRooms], currentSortBy: String, currentOrder: String, currentFilter: String) 
 
 @link(newPage:Int, newSortBy:String) = @{
     
@@ -19,7 +19,7 @@
     }
     
     // Generate the link
-    routes.AdminController.supply_index()
+    routes.AdminController.service(newPage, sortBy, order, currentFilter)
     
 }
 
@@ -29,9 +29,6 @@
     </th>
 }
 @main("Welcome to Play") {
-    <div id="actions">        
-        <a class="btn success" id="add" href="@routes.AdminController.add_supply()">Add a new supply</a>        
-    </div>
     <div id="back">        
         <a class="btn success" id="back" href="@routes.AdminController.index()">Back</a>        
     </div>
@@ -48,18 +45,17 @@
         
             <thead>
                 <tr>
-                    @header("name", "SupplySpecificType")
-                    @header("supply_sub_type.name", "Supply Sub Type")
-                    @header("supply_type.name", "Supply Type")
+                    @header("name", "Room Name")
+                    @header("id", "Check Schedule")
                 </tr>
             </thead>
             
             <tbody>
-                @for(supply <- currentPage.getList) {
+                @for(operatingroom <- currentPage.getList) {
                     <tr>
-                        <td>@supply.name</td>       
-                        <td>@supply.supply_sub_type.name</td>   
-                        <td>@supply.supply_sub_type.supply_type.name</td>                  
+                        <td>@operatingroom.name</td>   
+                        <td><a href="@routes.AdminController.operating_room_schedules(operatingroom.id)">@operatingroom.id</a></td>
+                   
                     </tr>
                 }
             </tbody>            

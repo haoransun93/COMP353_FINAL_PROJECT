@@ -1,0 +1,159 @@
+@(role_id: Long, employeePage: com.avaje.ebean.Page[Employee], rolePage: com.avaje.ebean.Page[Role], shiftPage: com.avaje.ebean.Page[Shift], taskPage: com.avaje.ebean.Page[Task], currentSortBy: String, currentOrder: String, currentFilter: String, hoursWorked: Int, totalPay: Int, start_date: String, end_date: String) 
+
+@link(newPage:Int, newSortBy:String) = @{
+    
+    var sortBy = currentSortBy
+    var order = currentOrder
+    
+    if(newSortBy != null) {
+        sortBy = newSortBy
+        if(currentSortBy == newSortBy) {
+            if(currentOrder == "asc") {
+                order = "desc"
+            } else {
+                order = "asc"
+            }
+        } else {
+            order = "asc"
+        }
+    }
+    
+    // Generate the link
+    routes.PayrollController.index()
+    
+}
+
+@header(key:String, title:String) = {
+    <th class="@key.replace(".","_") header @if(currentSortBy == key) @{if(currentOrder == "asc") "headerSortDown" else "headerSortUp"}>
+       <a href="@link(0, key)">@title</a>
+    </th>
+}
+@main("Welcome to Play") {
+
+       <h2>Employee</h2>
+        <table class="computers zebra-striped">        
+            <thead>
+                <tr>
+                    @header("name", "Employee Name")
+                    @header("unit.name", "Unit")
+                   	@header("role.name", "Role")
+                </tr>
+            </thead>            
+            <tbody>
+                @for(employee <- employeePage.getList) {
+                    <tr>
+                        <td>@employee.name</td>
+                        <td>@employee.unit.name</td>  
+                        <td>@employee.role.name</td>                        
+                    </tr>
+                }
+            </tbody>            
+        </table> 
+        
+       <h2>Pay Details</h2>
+       @for(role <- rolePage.getList) {
+        <table class="computers zebra-striped">        
+            <thead>
+                <tr>
+                	@header("name", "Position Name")
+                	
+                	@if(role.pay.salary_or_hourly) {
+                	@header("pay.hourly_base", "Hourly Wage")
+					@header("pay.hourly_increase", "Hourly Increase")
+					@header("pay.hourly_increase_experience_years", "Years of Experienced Needed For Increase")
+					@header("pay.overtime_rate", "Overtime Rate x Salary")
+					@header("pay.maximum_weekly_hours", "Maximum Overtime Allowed")           	
+                	} else {
+					@header("pay.annual_salary", "Salary")
+					@header("pay.annual_salary_increase_percentage", "Salary Increase %")
+					}
+
+                </tr>
+            </thead>            
+            <tbody>
+                    <tr>
+                        <td>@role.name</td>
+                    	@if(role.pay.salary_or_hourly) {
+                    	<td>@role.pay.hourly_base</td>
+                        <td>@role.pay.hourly_increase</td>
+                        <td>@role.pay.hourly_increase_experience_years</td>
+                        <td>@role.pay.overtime_rate</td>
+                        <td>@role.pay.maximum_weekly_hours</td>               	
+                    	} else {
+                        <td>@role.pay.annual_salary</td>
+                        <td>@role.pay.annual_salary_increase_percentage</td>
+               			}
+                    </tr>
+                }
+            </tbody>            
+        </table> 
+        
+        <h2>Pay Period @start_date TO @end_date</h2>
+        
+        @if(role_id == 3){
+                       <h2>Tasks</h2>
+        <table class="computers zebra-striped">        
+            <thead>
+                <tr>
+                	@header("service.name", "Service Name")
+                	@header("service.cost", "Cost Of Service")
+                	@header("date", "Date Performed")
+                </tr>
+            </thead>            
+            <tbody>
+                   	@if(taskPage == null) {
+       				} else {
+      
+      			 	@for(task <- taskPage.getList) {
+                    <tr>
+                        <td>@task.service.name</td>
+                        <td>@task.service.cost</td>
+                        <td>@task.date</td>
+                    </tr>    
+                    }     
+                    }       
+            </tbody>            
+        </table> 
+        } else {
+               <h2>Shift</h2>
+        <table class="computers zebra-striped">        
+            <thead>
+                <tr>
+                	@header("start_date", "Shift Start")
+                	@header("end_date", "Shift End")
+                </tr>
+            </thead>            
+            <tbody>
+                   	@if(shiftPage == null) {
+       				} else {
+      
+      			 	@for(shift <- shiftPage.getList) {
+                    <tr>
+                        <td>@shift.start_date</td>
+                        <td>@shift.end_date</td>
+                    </tr>    
+                    }     
+                    }       
+            </tbody>            
+        </table>  
+        
+        }
+
+        <h2>Total Pay</h2>
+        <table class="computers zebra-striped">        
+            <thead>
+                <tr>
+                    <td>HOURS WORKED</td>
+                    <td>TOTAL PAY</td>
+                </tr>
+            </thead>            
+            <tbody>
+                <tr>
+                    <td>@hoursWorked</td>
+                    <td>@totalPay</td>
+                </tr>
+            </tbody>            
+        </table>      
+}  
+            
+

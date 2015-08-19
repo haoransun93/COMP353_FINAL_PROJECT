@@ -23,6 +23,9 @@ public class Service extends Model{
 	@Constraints.Required
 	public Unit unit;
 	
+	@Constraints.Required	
+	public Double cost;
+	
     public static Finder<Long,Service> find = new Finder<Long,Service>(Long.class, Service.class); 
 	
     public static Page<Service> page(int page, int pageSize, String sortBy, String order, String filter) {

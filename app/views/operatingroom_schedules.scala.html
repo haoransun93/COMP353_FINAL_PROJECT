@@ -1,4 +1,4 @@
-@(currentPage: com.avaje.ebean.Page[SupplySpecificType], currentSortBy: String, currentOrder: String, currentFilter: String) 
+@(operatingroom_id: Long, currentPage: com.avaje.ebean.Page[OperatingRoomSchedule], currentSortBy: String, currentOrder: String, currentFilter: String) 
 
 @link(newPage:Int, newSortBy:String) = @{
     
@@ -19,7 +19,7 @@
     }
     
     // Generate the link
-    routes.AdminController.supply_index()
+    routes.AdminController.service(newPage, sortBy, order, currentFilter)
     
 }
 
@@ -29,11 +29,11 @@
     </th>
 }
 @main("Welcome to Play") {
-    <div id="actions">        
-        <a class="btn success" id="add" href="@routes.AdminController.add_supply()">Add a new supply</a>        
-    </div>
     <div id="back">        
         <a class="btn success" id="back" href="@routes.AdminController.index()">Back</a>        
+    </div>
+    <div>        
+        <a class="btn success" href="@routes.AdminController.schedule_new(operatingroom_id)">Schedule New</a>        
     </div>
     
     @if(currentPage.getTotalRowCount == 0) {
@@ -48,18 +48,22 @@
         
             <thead>
                 <tr>
-                    @header("name", "SupplySpecificType")
-                    @header("supply_sub_type.name", "Supply Sub Type")
-                    @header("supply_type.name", "Supply Type")
+                    @header("operating_room.name", "Room Name")
+                    @header("task.service.name", "Service Name")
+                   	@header("start", "Start Date")
+                    @header("start_hour", "Start Hour")
+                    @header("end_hour", "End Hour")
                 </tr>
             </thead>
             
             <tbody>
-                @for(supply <- currentPage.getList) {
+                @for(operatingroomschedule <- currentPage.getList) {
                     <tr>
-                        <td>@supply.name</td>       
-                        <td>@supply.supply_sub_type.name</td>   
-                        <td>@supply.supply_sub_type.supply_type.name</td>                  
+						<td>@operatingroomschedule.operating_room.name</td>
+						<td>@operatingroomschedule.task.service.name</td>
+						<td>@operatingroomschedule.start</td>
+						<td>@operatingroomschedule.start_hour</td>
+						<td>@operatingroomschedule.end_hour</td>
                     </tr>
                 }
             </tbody>            

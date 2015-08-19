@@ -21,6 +21,12 @@ public class Schedule extends Model{
 	@Constraints.Required
 	public Employee employee;	
 	
+	@Constraints.Required
+	public Date start_date;
+	
+	@Constraints.Required
+	public Date end_date;
+	
     public static Finder<Long,Schedule> find = new Finder<Long,Schedule>(Long.class, Schedule.class); 
 	
     public static Page<Schedule> page(int page, int pageSize, String sortBy, String order, String filter) {

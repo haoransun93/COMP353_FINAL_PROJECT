@@ -65,3 +65,7 @@ table.computers .header a {
 input {
     min-height: 20px;
 }
+
+label {
+	padding:10px;
+}

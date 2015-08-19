@@ -27,9 +27,15 @@ public class OperatingRooms extends Model{
     public static Page<OperatingRooms> page(int page, int pageSize, String sortBy, String order, String filter) {
         return 
             find.where()
-                //.ilike("name", "%" + filter + "%")
-                //.orderBy(sortBy + " " + order)
                 .findPagingList(pageSize)
                 .getPage(page);
     }
+    
+    public static Map<String,String> get_room(long id) {
+        LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
+        for(OperatingRooms c: OperatingRooms.find.where().ilike("id", Long.toString(id)).orderBy("name").findList()) {
+            options.put(c.id.toString(), c.name);
+        }
+        return options;
+    }   
 }

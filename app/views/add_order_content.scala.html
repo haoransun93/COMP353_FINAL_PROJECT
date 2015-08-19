@@ -15,7 +15,10 @@
                 '_showConstraints -> false
             )
             
-     		@inputText(contentForm("Quantity"), '_label -> "Quantity")
+     		@inputText(
+           		field = contentForm("quantity"),
+           		args = '_label -> "Quantity", 'placeholder -> 0
+      		)
      		
      		@select(
                 contentForm("supply_specific_type.id"), 

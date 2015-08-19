@@ -50,6 +50,7 @@
                 <tr>
                     @header("name", "Service")
                     @header("unit.name", "Unit Name")
+                    @header("cost", "Cost")
                 </tr>
             </thead>
             
@@ -57,7 +58,8 @@
                 @for(service <- currentPage.getList) {
                     <tr>
                         <td><a href="@routes.AdminController.edit_service(service.id)">@service.name</a></td>
-                        <td>@service.unit.name</td>                      
+                        <td>@service.unit.name</td>     
+                        <td>@service.cost</td>                    
                     </tr>
                 }
             </tbody>            

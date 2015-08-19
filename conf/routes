@@ -45,59 +45,74 @@ POST	/admin/order_content/:id/save					controllers.AdminController.save_order_co
 GET		/admin/order_content/param_list/edit			controllers.AdminController.edit_order_content(id:Long, page:Int ?=0, s ?= "name", o ?= "asc", f ?= "")
 GET     /admin/order_content/:id/delete		     		controllers.AdminController.delete_order_content(id:Long)
 GET 	/admin/order_content/:id/finish					controllers.AdminController.finish_edit(id:Long)
+GET    	/admin/order_content/param_list/delete     		controllers.AdminController.delete_order_content(id:Long, orderID:Long)
+POST 	/admin/order_content/finish						controllers.AdminController.finish_edit()
 
+##### OPERATING ROOM #####
+GET		/admin/operating_room/index						controllers.AdminController.operating_room_index()
+GET		/admin/operating_room/schedules/:id				controllers.AdminController.operating_room_schedules(id:Long)
+GET		/admin/operating_room/schedules/new/:id			controllers.AdminController.schedule_new(id:Long)
+POST	/admin/operating_room/schedules/save			controllers.AdminController.save_schedule()
 ##################### DOCTOR SECTION
-GET     /doctor                        				controllers.DoctorController.index()
+GET     /doctor                        					controllers.DoctorController.index()
 
-GET     /doctor/patient                 							controllers.DoctorController.patient_index()
-GET		/doctor/patient								controllers.DoctorController.patient(id:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
-GET		/doctor/patient/new							controllers.DoctorController.create_patient()
-POST	/doctor/patient							controllers.DoctorController.save_patient()
+GET     /doctor/patient                 				controllers.DoctorController.patient_index()
+GET		/doctor/patient									controllers.DoctorController.patient(id:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET		/doctor/patient/new								controllers.DoctorController.create_patient()
+POST	/doctor/patient									controllers.DoctorController.save_patient()
 GET		/doctor/patient/:id								controllers.DoctorController.edit_patient(id:Long)
-POST	/doctor/patient/:id							controllers.DoctorController.update_patient(id:Long)
-POST    /doctor/patient/:id/delete       		controllers.DoctorController.delete_patient(id:Long)
+POST	/doctor/patient/:id								controllers.DoctorController.update_patient(id:Long)
+POST    /doctor/patient/:id/delete       				controllers.DoctorController.delete_patient(id:Long)
 
-GET     /doctor/patient_visit                 							controllers.DoctorController.patient_visit_index()
-GET		/doctor/patient_visit								controllers.DoctorController.patient_visit(id:Int ?= 0, s ?= "name", o ?= "asc", f:Long)
-GET		/doctor/patient_visit/new							controllers.DoctorController.add_patient_visit(id:Long)
+GET     /doctor/patient_visit                 			controllers.DoctorController.patient_visit_index()
+GET		/doctor/patient_visit							controllers.DoctorController.patient_visit(id:Int ?= 0, s ?= "name", o ?= "asc", f:Long)
+GET		/doctor/patient_visit/new						controllers.DoctorController.add_patient_visit(id:Long)
 POST	/doctor/patient_visit							controllers.DoctorController.save_patient_visit()
-GET		/doctor/patient_visit/:id								controllers.DoctorController.edit_patient_visit(id:Long)
-POST	/doctor/patient_visit/:id							controllers.DoctorController.update_patient_visit(id:Long)
-POST    /doctor/patient_visit/:id/delete       		controllers.DoctorController.delete_patient_visit(id:Long)
+GET		/doctor/patient_visit/:id						controllers.DoctorController.edit_patient_visit(id:Long)
+POST	/doctor/patient_visit/:id						controllers.DoctorController.update_patient_visit(id:Long)
+POST    /doctor/patient_visit/:id/delete       			controllers.DoctorController.delete_patient_visit(id:Long)
 
-GET     /doctor/patient_assignment                 							controllers.DoctorController.patient_assignment_index()
-GET		/doctor/patient_assignment								controllers.DoctorController.patient_assignment(id:Int ?= 0, s ?= "name", o ?= "asc", f:Long)
-GET		/doctor/patient_assignment/new							controllers.DoctorController.add_patient_assignment()
-POST	/doctor/patient_assignment							controllers.DoctorController.save_patient_assignment()
-GET		/doctor/patient_assignment/:id								controllers.DoctorController.edit_patient_assignment(id:Long)
-POST	/doctor/patient_assignment/:id							controllers.DoctorController.update_patient_assignment(id:Long)
-POST    /doctor/patient_assignment/:id/delete       		controllers.DoctorController.delete_patient_assignment(id:Long)
+GET     /doctor/patient_assignment                 		controllers.DoctorController.patient_assignment_index()
+GET		/doctor/patient_assignment						controllers.DoctorController.patient_assignment(id:Int ?= 0, s ?= "name", o ?= "asc", f:Long)
+GET		/doctor/patient_assignment/new					controllers.DoctorController.add_patient_assignment()
+POST	/doctor/patient_assignment						controllers.DoctorController.save_patient_assignment()
+GET		/doctor/patient_assignment/:id					controllers.DoctorController.edit_patient_assignment(id:Long)
+POST	/doctor/patient_assignment/:id					controllers.DoctorController.update_patient_assignment(id:Long)
+POST    /doctor/patient_assignment/:id/delete       	controllers.DoctorController.delete_patient_assignment(id:Long)
 
-GET		/doctor/patient_treatment_history					controllers.DoctorController.patient_treatment_history(id:Int ?= 0, s ?= "name", o ?= "asc", f:Long)
-GET		/doctor/patient_treatment_history/new					controllers.DoctorController.add_patient_treatment_history(visit_id:Long)
-POST	/doctor/patient_treatment_history							controllers.DoctorController.save_patient_treatment_history(visit_id:Long)
+GET		/doctor/patient_treatment_history				controllers.DoctorController.patient_treatment_history(id:Int ?= 0, s ?= "name", o ?= "asc", f:Long)
+GET		/doctor/patient_treatment_history/new			controllers.DoctorController.add_patient_treatment_history(visit_id:Long)
+POST	/doctor/patient_treatment_history				controllers.DoctorController.save_patient_treatment_history(visit_id:Long)
 
-GET		/doctor/supervision					controllers.DoctorController.supervision(id:Int ?= 0, s ?= "name", o ?= "asc", f:Long)
+GET		/doctor/supervision								controllers.DoctorController.supervision(id:Int ?= 0, s ?= "name", o ?= "asc", f:Long)
 
-GET		/doctor/task					controllers.DoctorController.task(id:Int ?= 0, s ?= "name", o ?= "asc", f:Long)
-GET		/doctor/task/new					controllers.DoctorController.add_task(history_id:Long)
-POST	/doctor/task							controllers.DoctorController.save_task(history_id:Long)
-GET		/doctor/task/:id					controllers.DoctorController.edit_task(id:Long)
-GET		/doctor/task/:id					controllers.DoctorController.update_task(id:Long)
+GET		/doctor/task									controllers.DoctorController.task(id:Int ?= 0, s ?= "name", o ?= "asc", f:Long)
+GET		/doctor/task/new								controllers.DoctorController.add_task(history_id:Long)
+POST	/doctor/task									controllers.DoctorController.save_task(history_id:Long)
+GET		/doctor/task/:id								controllers.DoctorController.edit_task(id:Long)
+GET		/doctor/task/:id								controllers.DoctorController.update_task(id:Long)
 
 
 ##################### NURSE SECTION
 
 GET     /nurse                     					controllers.NurseController.index()
 
-##################### NURSE SUPERVISOR SECTION
+##################### NURSE SUPERVISOR SECTIONs
 
 GET     /nurseshiftsupervisor           			controllers.NurseShiftSupervisorController.index()
 
 ##################### INTERN SECTION
-GET     /internresident         					controllers.InternResidentController.index()
+GET     /internresident         						controllers.InternResidentController.index()
+GET		/internresident/schedule						controllers.InternResidentController.schedule()
+
+##################### REPORT SECTION
+GET		/report/service_provided					controllers.ReportController.service_provided_report()
+GET		/report/cost_usage_of_supplies				controllers.ReportController.cost_usage_supplies_report()
+GET		/report/service_provided_doctor				controllers.ReportController.service_provided_doctor_report()
 
 
+##################### PAYROLL SECTION
+GET		/payroll												controllers.PayrollController.index()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -23,22 +23,25 @@ public class OperatingRoomSchedule extends Model{
 	
 	@ManyToOne
 	@Constraints.Required
-	public OperatingRooms operating_room;
+	public OperatingRooms operating_room;	
+
+	@Constraints.Required
+	@Formats.DateTime(pattern = "yyyy-MM-dd")
+	public Date start;
 	
 	@Constraints.Required
-	public DateTime start_time;
+	public int start_hour;
 	
 	@Constraints.Required
-	public DateTime end_time;
+	public int end_hour;	
 	
     public static Finder<Long,OperatingRoomSchedule> find = new Finder<Long,OperatingRoomSchedule>(Long.class, OperatingRoomSchedule.class); 
 	
     public static Page<OperatingRoomSchedule> page(int page, int pageSize, String sortBy, String order, String filter) {
         return 
             find.where()
-                .ilike("name", "%" + filter + "%")
-                .orderBy(sortBy + " " + order)
+                .ilike("operating_room.id", filter)
                 .findPagingList(pageSize)
                 .getPage(page);
-    }
+    }   
 }
