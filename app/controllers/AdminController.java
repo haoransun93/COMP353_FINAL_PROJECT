@@ -218,7 +218,7 @@ public class AdminController extends Controller{
                 );
     }
     
-    public static Result fire_his_ass(long id) {
+    public static Result fire_employee(long id) {
     	Employee.find.byId(id).delete();
     	flash("success","Computer has been deleted");
     	return delete_order(id);
