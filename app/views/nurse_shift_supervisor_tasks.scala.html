@@ -1,0 +1,83 @@
+@(currentPage: com.avaje.ebean.Page[Task], currentSortBy: String, currentOrder: String, currentFilter: Long) 
+
+@link(newPage:Int, newSortBy:String) = @{
+    
+    var sortBy = currentSortBy
+    var order = currentOrder
+    
+    if(newSortBy != null) {
+        sortBy = newSortBy
+        if(currentSortBy == newSortBy) {
+            if(currentOrder == "asc") {
+                order = "desc"
+            } else {
+                order = "asc"
+            }
+        } else {
+            order = "asc"
+        }
+    }
+    
+    // Generate the link
+    routes.NurseShiftSupervisorController.task(newPage, sortBy, order, currentFilter)
+    
+}
+
+@header(key:String, title:String) = {
+    <th class="@key.replace(".","_") header @if(currentSortBy == key) @{if(currentOrder == "asc") "headerSortDown" else "headerSortUp"}>
+       <a href="@link(0, key)">@title</a>
+    </th>
+}
+@main("Welcome to Play") {
+
+
+    
+    @if(currentPage.getTotalRowCount == 0) {
+        
+        <div class="well">
+            <em>Nothing to display</em>
+        </div>
+        
+    } else {
+	
+
+        
+		
+		
+        <table class="nurse_shift_supervisor_class">
+        
+            <thead>
+                <tr>
+                    @header("id", "Task ID")
+                    @header("name", "Task Name")
+					@header("service.name","Service Name")
+					@header("canceled","Cancel")
+					@header("patient_treatment_history.id", "Patient Treatment ID")
+					@header("patient_treatment_history.patient_visit.patient.id", "Patient ID")
+					@header("patient_treatment_history.patient_visit.patient.name", "Patient Name")
+					@header("shift.start_date", "Shift Start Date")
+					@header("shift.end_date", "Shift End Date")
+				
+		
+                </tr>
+            </thead>
+            
+            <tbody>
+                @for(nurse_task <- currentPage.getList) {
+                    <tr>
+                        <td>@nurse_task.id</td>
+                        <td>@nurse_task.name</td>  
+						<td>@nurse_task.service.name</td>
+						<td><a href="@routes.NurseShiftSupervisorController.edit_task(nurse_task.id)">@nurse_task.canceled</a></td>
+						<td><a href="@routes.NurseShiftSupervisorController.add_task(nurse_task.patient_treatment_history.id)">@nurse_task.patient_treatment_history.id</a></td>
+						<td>@nurse_task.patient_treatment_history.patient_visit.patient.id</td>
+						<td>@nurse_task.patient_treatment_history.patient_visit.patient.name</td>
+						<td>@nurse_task.shift.start_date</td>
+						<td>@nurse_task.shift.end_date</td>
+				
+                    </tr>
+                }
+            </tbody>            
+        </table> 
+    }        
+}

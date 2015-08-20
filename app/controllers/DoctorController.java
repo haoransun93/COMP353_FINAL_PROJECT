@@ -225,7 +225,7 @@ public class DoctorController extends Controller{
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////task
 	public static Result task_index() {
-    	return task(0, "name", "asc", Long.parseLong(session("employee_id")));
+    	return task(0, "name", "asc", (long)3);
 
     }
 	

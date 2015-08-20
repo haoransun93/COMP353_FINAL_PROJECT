@@ -1,11 +1,10 @@
-@(history_id:Long, taskForm: Form[Task])
-
+@(id: Long, taskForm: Form[Task])
+<!--note for edit, it takes in id:long, which is patient_assignment.id for when we click on to edit, that one is to edit-->
 @import helper._
-
-    @main("Welcome to Play") {
-	<h1>Add a new task</h1>
+  
+    @main("Welcome to Play") {<h1>Cancelling a task</h1>
     
-    @form(routes.DoctorController.save_task()) {
+    @form(routes.NurseShiftSupervisorController.update_task(id)) {
         
         <fieldset>
         	@inputText(taskForm("name"), '_label -> "Name")
@@ -23,19 +22,16 @@
             )
 			@inputText(taskForm("date"), '_label -> "Date")
 			@checkbox(field = taskForm("canceled"), '_label -> "Cancel")
-			@select(
-                taskForm("patient_treatment_history.id"), 
-                options(PatientTreatmentHistory.find_the_id(history_id)), 
-                '_label -> "Treatment History ID",
+           	@select(
+                taskForm("shift.id"), 
+                options(Shift.options), 
+                '_label -> "Shift ID",
                 '_showConstraints -> false
             )
-           	
-            
         </fieldset>
-        
-        <div class="actions">
-            <input type="submit" value="Create a new patient visit" class="btn"> 
-        </div>
-        
-    }    
+               
+    }
+	@form(routes.NurseShiftSupervisorController.delete_task(id), 'class -> "topRight") {
+        <input type="submit" value="Delete" class="btn danger">
+    } 	
 }

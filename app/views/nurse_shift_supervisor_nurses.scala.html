@@ -1,0 +1,65 @@
+@(currentPage: com.avaje.ebean.Page[Supervision], currentSortBy: String, currentOrder: String, currentFilter: Long) 
+
+@link(newPage:Int, newSortBy:String) = @{
+    
+    var sortBy = currentSortBy
+    var order = currentOrder
+    
+    if(newSortBy != null) {
+        sortBy = newSortBy
+        if(currentSortBy == newSortBy) {
+            if(currentOrder == "asc") {
+                order = "desc"
+            } else {
+                order = "asc"
+            }
+        } else {
+            order = "asc"
+        }
+    }
+    
+    // Generate the link
+    routes.NurseShiftSupervisorController.nurse(newPage, sortBy, order, currentFilter)
+    
+}
+
+@header(key:String, title:String) = {
+    <th class="@key.replace(".","_") header @if(currentSortBy == key) @{if(currentOrder == "asc") "headerSortDown" else "headerSortUp"}>
+       <a href="@link(0, key)">@title</a>
+    </th>
+}
+@main("Welcome to Play") {
+    
+    @if(currentPage.getTotalRowCount == 0) {
+        
+        <div class="well">
+            <em>Nothing to display</em>
+        </div>
+        
+    } else {
+        
+        <table class="nurse_shift_supervisor_class">
+        
+            <thead>
+                <tr>
+                    @header("supervised.id", "ID")
+                    @header("supervised.name", "Name")
+					<th>Tasks</th>
+
+					
+                </tr>
+            </thead>
+            
+            <tbody>
+                @for(nurse_service <- currentPage.getList) {
+                    <tr>
+                        <td>@nurse_service.supervised.id</td>
+                        <td>@nurse_service.supervised.name</td>     
+						<td><a href="@routes.NurseShiftSupervisorController.task_index(nurse_service.supervised.id)">Click</a></td>
+
+                    </tr>
+                }
+            </tbody>            
+        </table> 
+    }        
+}
