@@ -229,7 +229,7 @@ public class AdminController extends Controller{
     	if(employeeForm.hasErrors()){
     		return badRequest(edit_employee.render(id, employeeForm));
     	}
-    	employeeForm.get().save();
+    	employeeForm.get().update(id);
     	return employee_index();
     }
     

@@ -55,11 +55,11 @@ POST	/admin/operating_room/schedules/save/:id		controllers.AdminController.save_
 ##### EMPLOYEE #####
 GET 	/admin/employee/index							controllers.AdminController.employee_index()
 GET 	/admin/employee/edit/:id						controllers.AdminController.edit_employee(id:Long)
-POST	/admin/employee/save/:id						controllers.AdminController.save_employee(id:Long)
+GET		/admin/employee/save/:id						controllers.AdminController.save_employee(id:Long)
 GET    	/admin/employee/delete/:id    					controllers.AdminController.fire_employee(id:Long)
 GET 	/admin/employee/shift/:id						controllers.AdminController.employee_schedule(id:Long)
 GET		/admin/employee/shift/new/:id					controllers.AdminController.add_shift(id:Long)
-POST	/admin/employee/shift/save/:id					controllers.AdminController.save_shift(id:Long)
+GET		/admin/employee/shift/save/:id					controllers.AdminController.save_shift(id:Long)
 	
 ##################### DOCTOR SECTION
 GET     /doctor                        					controllers.DoctorController.index()
