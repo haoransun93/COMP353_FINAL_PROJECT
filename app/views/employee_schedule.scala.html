@@ -37,10 +37,10 @@
         <a class="btn success" id="finish" href="@routes.AdminController.employee_index()">Done</a>        
     </div>         
     
+    <h2>Schedule</h2>
     <table class="computers zebra-striped">  
         <thead>
             <tr>
-                @header("employee", "Employee")
                 @header("start_time", "Start Time")
                 @header("end_time", "End Time")
             </tr>
@@ -50,7 +50,6 @@
             @for(shift <- currentPage.getList){
             	@if(shift.employee.id == empID){
             	<tr>
-            		<td>@shift.employee.id</td>
             		<td>@shift.start_date</td>
             		<td>@shift.end_date</td>
             	</tr>

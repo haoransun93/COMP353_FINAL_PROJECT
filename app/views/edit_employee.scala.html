@@ -24,17 +24,17 @@
 				'_showConstraints -> false	
 			)
 			
-     		@inputText(employeeForm("hire_date"), '_label -> "Hire Date")
+     		@inputDate(employeeForm("hire_date"), '_label -> "Hire Date")
      		
         </fieldset>
         
         <div class="actions">
             <input type="submit" value="Finish Edit" class="btn">
-            <input type ="submit" href="@routes.AdminController.employee_index()" class="btn" value ="Cancel"/>                  
+            <a href="@routes.AdminController.employee_index()" class="btn">Cancel</a> 
         </div>        
     }    
     
-    @form(routes.AdminController.fire_his_ass(id), 'class -> "topRight") {
-        <input type="submit" value="Fire his ass" class="btn danger">
+    @form(routes.AdminController.fire_employee(id), 'class -> "topRight") {
+        <input type="submit" value="Fire employee" class="btn danger">
     } 
 }

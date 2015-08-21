@@ -29,6 +29,7 @@ public class Employee extends Model{
 	public Role role;
 	
 	//@Constraints.Required
+	@Formats.DateTime(pattern="yyyy-MM-dd")
 	public java.util.Date hire_date;
 	
     public static Model.Finder<Long,Employee> find = new Model.Finder<Long,Employee>(Long.class, Employee.class); 
